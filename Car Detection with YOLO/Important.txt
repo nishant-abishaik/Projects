@@ -1,0 +1,11 @@
+**Important**
+
+There are several changes made for making the algorithm work on TF 2.0 (It was made for TF 1.0). The most important change is that for select versions of numpy, symbolic tensors cannot be passed as arguments for tensor operations.
+That is, simple element-wise operations such as np.multiply cannot be performed with two tensors made from tf.random_normal (which itself has been changed from 1.0 to 2.0, it is know tf.random.normal). An alternative is to use
+the multiply function from keras.layers for the same operation. 
+
+DONT MIX Keras, Tensorflow and Numpy. Some operations are version limited and the latest versions can cause a headache!
+
+One more important thing is that while this code can be run using Python 3.x, it is preferably run using python 2.x due to the fact that the YOLO h5 file was encoded using the latter. This leads to a bad marshal value-error caused by
+bad encoding. A workaround for this is to produce an arch with python 3.x
+which means that you open the h5 file with python 2.x and use save_weights instead of save_model and then use load_weights in python 3.x. Further guidance can be found online.
